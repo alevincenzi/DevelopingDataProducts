@@ -17,6 +17,7 @@ data$country <- as.character (data$V1)
 minDistance   <- 5000
 goalLatitude  <- 0
 goalLongitude <- 0
+goalCountry   <- ""
 goal          <- 0
 
 shinyServer(function(input, output, session) {
@@ -78,17 +79,20 @@ shinyServer(function(input, output, session) {
                 {
                         goalLatitude  <<- data[first,]$latitude
                         goalLongitude <<- data[first,]$longitude
+                        goalCountry   <<- data[first,]$country
                 }
                 
                 else if (goal == 2)
                 {
                         goalLatitude  <<- data[second,]$latitude
                         goalLongitude <<- data[second,]$longitude
+                        goalCountry   <<- data[second,]$country
                 }
                 else
                 {
                         goalLatitude  <<- data[third,]$latitude
                         goalLongitude <<- data[third,]$longitude
+                        goalCountry   <<- data[third,]$country
                 }
 
                 tmp <- list ("a" = 1, "b" = 2, "c" = 3)
@@ -177,17 +181,12 @@ shinyServer(function(input, output, session) {
                         
                         if (input$radio == goal)
                         
-                                return ("You found me!")
+                                return (paste ("You found me! (@ Longitude ",goalLongitude, ", Latitude", goalLatitude,")"))
 
                         else
                                 
-                                return ("Not there!")
+                                return (paste ("Not there! I was in ", goalCountry))
                         
                 })
-        })
-        
-        #output$referenceA <- renderText(goal)
-        #output$referenceB <- renderText(goalLatitude)
-        #output$referenceC <- renderText(goalLongitude)
-        
+        })        
 })
