@@ -27,6 +27,12 @@ shinyUI(fluidPage(
                 
                 mainPanel(
                         
+                        p("1. Find my current location moving the red cursor with the two sliders!"),
+                        p("2. The distance reported on the right measures how far the red cursor is from my location"),
+                        p("3. Search in which coutry I am and subimt your answer"),
+                        br(),
+                        p("--> Reload the page for a new search"),
+                        
                         imageOutput("finalEarthImage", width = "100%", height ="100%"),
  
                         br(), br(),
