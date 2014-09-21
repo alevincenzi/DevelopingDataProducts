@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Where am I ???</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Where am I ???">
+  <meta name="author" content="Alessandro Vincenzi">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>Where am I ???</h1>
+    <h2>A simple shiny application</h2>
+    <p>Alessandro Vincenzi<br/></p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>Instructions</h2>
+  </hgroup>
+  <article data-timings="">
+    <ol>
+<li>The purpose of this application is to find the location where I am.</li>
+<li>Three countries are loaded randomly from a csv file and proposed at every run.</li>
+<li>The location where I am is among the three choices shown. You must guess it!</li>
+<li>To help you out, two sliders can be used to move a red cursor on a Earth map.</li>
+<li>Try to move it!</li>
+<li><b>Distance</b> measures the kilometers between the red cursor and the center of the country that you should guess.</li>
+<li>The more you can reduce the kilometers, the closer you get to the right answer!</li>
+<li>Once you find me, select the right choice and check it out.</li>
+<li>You have only one chance ...</li>
+<li>Reload the page to start a new session with a new location.</li>
+</ol>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Generating the cursor on the map</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>The Earth maps showing the red cursor is generated with renderImage and shown every time a slider is moved</p></li>
+<li><p>An exeample of the usage of renderImage can be found here:</p>
+
+<p><a href="http://www.inside-r.org/packages/cran/shiny/docs/renderImage">http://www.inside-r.org/packages/cran/shiny/docs/renderImage</a></p></li>
+<li><p>A jpeg file is loaded from the www directoryr and the red circle is drawn setting the RGB values of its pixels.</p></li>
+<li><p>Every new jpeg image is created as a temporary file and then deleted</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Generating Random Locations</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Countries and their coordintes are read from a csv file stored in the directory www.</p></li>
+<li><p>The radio buttons are generated every time the page is loaded ad reported to the user interface using renderUi</p></li>
+<li><p>A minimum distance of 10000 Km is guaranteed</p></li>
+<li><p>The distance between two points at coordinates (80,30) and (0,-20) is computed as follow:</p></li>
+</ul>
+
+<pre><code class="r">library(fields)
+</code></pre>
+
+<pre><code class="r">d&lt;- rdist.earth(matrix ( c(80.0,  30.0), ncol=2), matrix ( c( 0.0, -20.0), ncol=2), miles = FALSE, R  =  6371)
+round (d[1][1])
+</code></pre>
+
+<pre><code>## [1] 10197
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>References</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>This presentation has been written using Slidify</p>
+
+<p><a href="http://ramnathv.github.io/slidify/">http://ramnathv.github.io/slidify/</a></p></li>
+<li><p>Coordinates are takent from The world Factbook, from the CIA web site:</p>
+
+<p><a href="https://www.cia.gov/library/publications/the-world-factbook/fields/2011.html">https://www.cia.gov/library/publications/the-world-factbook/fields/2011.html</a></p></li>
+<li><p>Check wikipedia for everithing else!</p>
+
+<p><a href="http://www.wikipedia.org/">http://www.wikipedia.org/</a></p></li>
+</ul>
+
+<p class='..</p>
+
+ '></article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='Instructions'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='Generating the cursor on the map'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='Generating Random Locations'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='References'>
+         4
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
