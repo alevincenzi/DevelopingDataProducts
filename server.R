@@ -14,7 +14,7 @@ data$longitude <- as.numeric(data$V5) * ifelse (data$V7 == "E", 1, -1) ;
 
 data$country <- as.character (data$V1)
 
-minDistance   <- 5000
+minDistance   <- 10000
 goalLatitude  <- 0
 goalLongitude <- 0
 goalCountry   <- ""
